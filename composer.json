@@ -1,0 +1,40 @@
+{
+  "name": "michalper/jira_service_desk_api",
+  "description": "Unofficial JIRA Service Desk API",
+  "version": "0.0.1",
+  "homepage": "https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michał Per",
+      "email": "michal.per@encja.com",
+      "homepage": "https://github.com/michalper",
+      "role": "PHP Developer"
+    }
+  ],
+  "support": {
+    "email": "michal.per@encja.com"
+  },
+  "keywords": [
+    "jira",
+    "jiraservicedesk",
+    "atlassian"
+  ],
+  "require": {
+    "php": ">=5.3",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "require-dev": {
+  },
+  "type": "library",
+  "autoload": {
+    "psr-0": {
+      "JiraServiceDesk": "lib/"
+    },
+    "psr-4": {
+      "JiraServiceDesk\\": "JiraServiceDesk/",
+      "JiraServiceDesk\\Model\\": "JiraServiceDesk/Model/",
+      "JiraServiceDesk\\Service\\": "JiraServiceDesk/Service/"
+    }
+  }
+}
