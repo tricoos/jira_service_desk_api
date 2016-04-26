@@ -46,11 +46,9 @@ class Service
 
     private $options = [];
 
-    private $post_data;
-
     public function __construct()
     {
-        $this->client = new Client();
+        $this->client = new Client(['http_errors' => false]);
     }
 
     /**
@@ -110,7 +108,8 @@ class Service
     public function request()
     {
         $this->options['auth'] = [$this->username, $this->password];
-        return $this->client->request($this->type, $this->url, $this->options);
+        return new Response($this->client->request($this->type, $this->url, $this->options));
+
     }
 
     public static function dump($die, $variable, $desc = false, $noHtml = false)
