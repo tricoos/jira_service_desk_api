@@ -36,7 +36,7 @@ class RequestService
     {
         return $this->service
             ->setType(Service::REQUEST_METHOD_POST)
-            ->setPostData($request)
+            ->setPostData((array)$request)
             ->setUrl('request')
             ->request();
     }

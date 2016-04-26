@@ -97,7 +97,7 @@ class Service
      */
     public function setPostData($post_data)
     {
-        $this->options['body'] = $post_data;
+        $this->options['json'] = $post_data;
         return $this;
     }
 
