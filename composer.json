@@ -1,7 +1,7 @@
 {
   "name": "michalper/jira_service_desk_api",
   "description": "Unofficial JIRA Service Desk API",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/",
   "license": "MIT",
   "authors": [

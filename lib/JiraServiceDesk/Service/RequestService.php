@@ -2,6 +2,7 @@
 
 namespace JiraServiceDesk\Service;
 
+use JiraServiceDesk\Model\AttachmentModel;
 use JiraServiceDesk\Model\RequestModel;
 
 class RequestService
@@ -30,7 +31,7 @@ class RequestService
      * Refer to Field input formats reference on what field types take what values.
      * @see https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/request-createCustomerRequest
      * @param RequestModel $request
-     * @return array
+     * @return Response
      */
     public function createCustomerRequest(RequestModel $request)
     {
@@ -55,7 +56,7 @@ class RequestService
      * @param bool $expand
      * @param int $start
      * @param int $limit
-     * @return array
+     * @return Response
      */
     public function getMyCustomerRequests(
         $searchTerm = false,
@@ -101,7 +102,7 @@ class RequestService
      * @see https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/request-getCustomerRequestByIdOrKey
      * @param string $issueIdOrKey
      * @param string|bool $expand
-     * @return array
+     * @return Response
      */
     public function getCustomerRequestByIdOrKey($issueIdOrKey, $expand = false)
     {
@@ -125,7 +126,7 @@ class RequestService
      * @param string $issueIdOrKey
      * @param string $comment
      * @param bool $public
-     * @return array
+     * @return Response
      */
     public function createRequestComment($issueIdOrKey, $comment, $public = false)
     {
@@ -148,7 +149,7 @@ class RequestService
      * @param bool $internal Specifies whether to return internal comments or not. Default: true.
      * @param integer $start The starting index of the returned comments. Base index: 0. See the Pagination section for more details.
      * @param integer $limit The maximum number of comments to return per page. Default: 50. See the Pagination section for more details.
-     * @return array
+     * @return Response
      */
     public function getRequestComments($issueIdOrKey, $public = true, $internal = true, $start = 0, $limit = 50)
     {
@@ -172,7 +173,7 @@ class RequestService
      * @see https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/request/{issueIdOrKey}/comment-getRequestCommentById
      * @param $issueIdOrKey
      * @param $commentId
-     * @return array
+     * @return Response
      */
     public function getRequestCommentById($issueIdOrKey, $commentId)
     {
@@ -187,7 +188,7 @@ class RequestService
      * @see https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/request/{issueIdOrKey}/participant-removeRequestParticipants
      * @param string $issueIdOrKey
      * @param array $users
-     * @return array
+     * @return Response
      */
     public function removeRequestParticipants($issueIdOrKey, $users = [])
     {
@@ -206,7 +207,7 @@ class RequestService
      * @param string $issueIdOrKey
      * @param integer $start The starting index of the returned objects. Base index: 0. See the Pagination section for more details.
      * @param integer $limit The maximum number of request types to return per page. Default: 50. See the Pagination section for more details.
-     * @return array
+     * @return Response
      */
     public function getRequestParticipants($issueIdOrKey, $start = 0, $limit = 50)
     {
@@ -228,7 +229,7 @@ class RequestService
      * @see https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/request/{issueIdOrKey}/participant-addRequestParticipants
      * @param string $issueIdOrKey
      * @param array $users
-     * @return array
+     * @return Response
      */
     public function addRequestParticipants($issueIdOrKey, $users = [])
     {
@@ -250,7 +251,7 @@ class RequestService
      * @param string $issueIdOrKey
      * @param int $start The starting index of the returned objects. Base index: 0. See the Pagination section for more details.
      * @param int $limit The maximum number of request types to return per page. Default: 50. See the Pagination section for more details.
-     * @return array
+     * @return Response
      */
     public function getSlaInformation($issueIdOrKey, $start = 0, $limit = 50)
     {
@@ -274,7 +275,7 @@ class RequestService
      * @see https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/request/{issueIdOrKey}/sla-getSlaInformationById
      * @param $issueIdOrKey
      * @param $slaMetricId
-     * @return array
+     * @return Response
      */
     public function getSlaInformationById($issueIdOrKey, $slaMetricId)
     {
@@ -284,5 +285,24 @@ class RequestService
             ->request();
     }
 
-
+    /**
+     * Adds one or more temporary attachments that were created using Attach temporary file to a customer request.
+     * The attachment visibility is set by the public field.
+     * Setting attachment visibility is dependent on the user's permission.
+     * For example, Agents can create either public or internal attachments, while Unlicensed users can only create internal attachments, and Customers can only create public attachments.
+     * An additional comment may be provided which will be prepended to the attachments.
+     * @see https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/request/{issueIdOrKey}/attachment-createAttachment
+     * @param $issueIdOrKey
+     * @param AttachmentModel $attachmentModel
+     * @return Response
+     */
+    public function createAttachment($issueIdOrKey, AttachmentModel $attachmentModel)
+    {
+        return $this->service
+            ->setType(Service::REQUEST_METHOD_POST)
+            ->setPostData((array)$attachmentModel)
+            ->setUrl('request/' . $issueIdOrKey . '/attachment')
+            ->setExperimentalApi()
+            ->request();
+    }
 }

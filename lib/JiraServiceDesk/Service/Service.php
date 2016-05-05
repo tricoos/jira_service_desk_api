@@ -101,6 +101,35 @@ class Service
         return $this;
     }
 
+    /**
+     * @param array $headers
+     * @return Service
+     */
+    public function setHeaders($headers)
+    {
+        $this->options['headers'] = $headers;
+        return $this;
+    }
+
+    /**
+     * @param array $multipart
+     * @return Service
+     */
+    public function setMultipart($multipart)
+    {
+        $this->options['multipart'] = $multipart;
+        return $this;
+    }
+
+    /**
+     * @return Service
+     */
+    public function setExperimentalApi()
+    {
+        $this->options['headers']['X-ExperimentalApi'] = true;
+        return $this;
+    }
+
 
     /**
      * @return array
