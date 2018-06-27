@@ -1,8 +1,8 @@
 {
-  "name": "michalper/jira_service_desk_api",
+  "name": "gealtec/jira_service_desk_api",
   "description": "Unofficial JIRA Service Desk API",
-  "version": "0.1.0",
-  "homepage": "https://docs.atlassian.com/jira-servicedesk/REST/cloud/#servicedeskapi/",
+  "version": "1.0.0",
+  "homepage": "https://developer.atlassian.com/cloud/jira/service-desk/rest/",
   "license": "MIT",
   "authors": [
     {
@@ -10,10 +10,16 @@
       "email": "michal.per@encja.com",
       "homepage": "https://github.com/michalper",
       "role": "PHP Developer"
+    },
+    {
+      "name": "Alonso Alejandro Zúñiga Beltrán",
+      "email": "aazbeltran@outlook.com.com",
+      "homepage": "https://github.com/aazbeltran",
+      "role": "FullStack Developer"
     }
   ],
   "support": {
-    "email": "michal.per@encja.com"
+    "email": "aazbeltran@outlook.com"
   },
   "keywords": [
     "jira",
@@ -21,7 +27,7 @@
     "atlassian"
   ],
   "require": {
-    "php": ">=5.3",
+    "php": ">=5.5",
     "guzzlehttp/guzzle": "~6.0"
   },
   "require-dev": {

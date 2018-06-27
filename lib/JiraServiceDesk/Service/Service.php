@@ -51,6 +51,35 @@ class Service
         $this->client = new Client(['http_errors' => false]);
     }
 
+    public static function dump($die, $variable, $desc = false, $noHtml = false)
+    {
+        if (is_string($variable)) {
+            $variable = str_replace("<_new_line_>", "<BR>", $variable);
+        }
+
+        if ($noHtml) {
+            echo "\n";
+        } else {
+            echo "<pre>";
+        }
+
+        if ($desc) {
+            echo $desc . ": ";
+        }
+
+        print_r($variable);
+
+        if ($noHtml) {
+            echo "";
+        } else {
+            echo "</pre>";
+        }
+
+        if ($die) {
+            die();
+        }
+    }
+
     /**
      * @param mixed $username
      * @return Service
@@ -102,6 +131,26 @@ class Service
     }
 
     /**
+     * @param $put_data
+     * @return Service
+     */
+    public function setPutData($put_data)
+    {
+        $this->options['json'] = $put_data;
+        return $this;
+    }
+
+    /**
+     * @param $delete_data
+     * @return Service
+     */
+    public function setDeleteData($delete_data)
+    {
+        $this->options['json'] = $delete_data;
+        return $this;
+    }
+
+    /**
      * @param array $headers
      * @return Service
      */
@@ -126,48 +175,18 @@ class Service
      */
     public function setExperimentalApi()
     {
-        $this->options['headers']['X-ExperimentalApi'] = true;
+        $this->options['headers']['X-ExperimentalApi'] = 'opt-in';
         return $this;
     }
 
-
     /**
-     * @return array
+     * @return Response
      */
     public function request()
     {
         $this->options['auth'] = [$this->username, $this->password];
         return new Response($this->client->request($this->type, $this->url, $this->options));
 
-    }
-
-    public static function dump($die, $variable, $desc = false, $noHtml = false)
-    {
-        if (is_string($variable)) {
-            $variable = str_replace("<_new_line_>", "<BR>", $variable);
-        }
-
-        if ($noHtml) {
-            echo "\n";
-        } else {
-            echo "<pre>";
-        }
-
-        if ($desc) {
-            echo $desc . ": ";
-        }
-
-        print_r($variable);
-
-        if ($noHtml) {
-            echo "";
-        } else {
-            echo "</pre>";
-        }
-
-        if ($die) {
-            die();
-        }
     }
 
 }

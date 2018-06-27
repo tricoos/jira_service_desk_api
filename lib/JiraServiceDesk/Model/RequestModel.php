@@ -48,7 +48,7 @@ class RequestModel
     }
 
     /**
-     * @param int $serviceDeskId
+     * @param integer $serviceDeskId
      * @return RequestModel
      */
     public function setServiceDeskId($serviceDeskId)
@@ -66,7 +66,7 @@ class RequestModel
     }
 
     /**
-     * @param int $requestTypeId
+     * @param integer $requestTypeId
      * @return RequestModel
      */
     public function setRequestTypeId($requestTypeId)
