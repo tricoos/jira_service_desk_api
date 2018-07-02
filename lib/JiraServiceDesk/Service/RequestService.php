@@ -4,6 +4,7 @@ namespace JiraServiceDesk\Service;
 
 use JiraServiceDesk\Model\AdditionalCommentModel;
 use JiraServiceDesk\Model\AttachmentModel;
+use JiraServiceDesk\Model\RequestModel;
 
 class RequestService
 {
@@ -92,46 +93,15 @@ class RequestService
      * requestParticipants is not available to Users who have the customer permission only or if the feature is turned off for customers.
      * requestFieldValues is a map of Jira field IDs and their values. See Field input formats, for details of each field’s JSON semantics and the values they can take.
      * @see https://developer.atlassian.com/cloud/jira/service-desk/rest/#api-request-post
-     * @param string $channel
-     * @param string $raiseOnBehalfOf
-     * @param object $requestFieldValues
-     * @param string[] $requestParticipants
-     * @param string $requestTypeId
-     * @param string $serviceDeskId
+     * @param RequestModel $request
      * @return Response
      */
-    public function createCustomerRequest(
-        $channel = null,
-        $raiseOnBehalfOf = null,
-        $requestFieldValues = null,
-        $requestParticipants = null,
-        $requestTypeId = null,
-        $serviceDeskId = null
-    )
+    public function createCustomerRequest(RequestModel $request)
     {
-        $data = [];
-
-        if ($channel)
-            $data['channel'] = $channel;
-
-        if ($raiseOnBehalfOf)
-            $data['raiseOnBehalfOf'] = $raiseOnBehalfOf;
-
-        if ($requestFieldValues)
-            $data['requestFieldValues'] = $requestFieldValues;
-
-        if ($requestParticipants)
-            $data['requestParticipants'] = $requestParticipants;
-
-        if ($requestTypeId)
-            $data['requestTypeId'] = $requestTypeId;
-
-        if ($serviceDeskId)
-            $data['serviceDeskId'] = $serviceDeskId;
 
         return $this->service
             ->setType(Service::REQUEST_METHOD_POST)
-            ->setPostData($data)
+            ->setPostData((array)$request)
             ->setUrl('request')
             ->request();
     }
