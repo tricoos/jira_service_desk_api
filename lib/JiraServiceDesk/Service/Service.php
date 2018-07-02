@@ -48,7 +48,7 @@ class Service
 
     public function __construct()
     {
-        $this->client = new Client(['http_errors' => false]);
+        $this->client = new Client(['verify' => false, 'http_errors' => false]);
     }
 
     public static function dump($die, $variable, $desc = false, $noHtml = false)
