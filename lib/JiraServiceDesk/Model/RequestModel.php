@@ -40,6 +40,18 @@ class RequestModel
     public $requestParticipants;
 
     /**
+     * The ‘name’ field of the customer the request is being raised on behalf of.
+     * @var string
+     */
+    public $raiseOnBehalfOf;
+
+    /**
+     * (Experimental) Shows extra information for the request channel.
+     * @var string
+     */
+    public $channel;
+
+    /**
      * @return int
      */
     public function getServiceDeskId()
@@ -193,5 +205,40 @@ class RequestModel
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getRaiseOnBehalfOf()
+    {
+        return $this->raiseOnBehalfOf;
+    }
+
+    /**
+     * @param string $raiseOnBehalfOf
+     * @return RequestModel
+     */
+    public function setRaiseOnBehalfOf($raiseOnBehalfOf)
+    {
+        $this->raiseOnBehalfOf = $raiseOnBehalfOf;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    /**
+     * @param string $channel
+     * @return RequestModel
+     */
+    public function setChannel($channel)
+    {
+        $this->channel = $channel;
+        return $this;
+    }
 
 }
