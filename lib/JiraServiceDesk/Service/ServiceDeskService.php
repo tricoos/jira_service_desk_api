@@ -66,10 +66,11 @@ class ServiceDeskService
      * For example, to upload a file called myfile.txt in the Service Desk with ID 10001 use
      * @see https://developer.atlassian.com/cloud/jira/service-desk/rest/#api-servicedesk-serviceDeskId-attachTemporaryFile-post
      * @param $serviceDeskId
-     * @param $fileUrl
+     * @param $file
+     * @param $filename
      * @return Response
      */
-    public function attachTemporaryFile($serviceDeskId, $file)
+    public function attachTemporaryFile($serviceDeskId, $file, $filename = null)
     {
         return $this->service
             ->setType(Service::REQUEST_METHOD_POST)
@@ -84,7 +85,8 @@ class ServiceDeskService
                 [
                     [
                         'name' => 'file',
-                        'contents' => is_string($file) ? fopen($file, 'r') : $file
+                        'contents' => is_string($file) ? fopen($file, 'r') : $file,
+                        'filename' => $filename
                     ]
                 ]
             )
