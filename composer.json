@@ -1,7 +1,7 @@
 {
   "name": "gealtec/jira_service_desk_api",
   "description": "Unofficial JIRA Service Desk API",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://developer.atlassian.com/cloud/jira/service-desk/rest/",
   "license": "MIT",
   "authors": [

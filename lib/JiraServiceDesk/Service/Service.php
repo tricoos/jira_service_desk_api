@@ -185,7 +185,9 @@ class Service
     public function request()
     {
         $this->options['auth'] = [$this->username, $this->password];
-        return new Response($this->client->request($this->type, $this->url, $this->options));
+        $options = $this->options;
+        $this->options = [];
+        return new Response($this->client->request($this->type, $this->url, $options));
 
     }
 
