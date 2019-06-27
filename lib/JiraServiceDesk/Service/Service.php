@@ -185,6 +185,7 @@ class Service
     public function request()
     {
         $this->options['auth'] = [$this->username, $this->password];
+        $this->setExperimentalApi();
         $options = $this->options;
         $this->options = [];
         return new Response($this->client->request($this->type, $this->url, $options));
