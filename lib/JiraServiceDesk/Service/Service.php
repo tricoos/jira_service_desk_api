@@ -186,6 +186,7 @@ class Service
     {
         $this->options['auth'] = [$this->username, $this->password];
         $this->setExperimentalApi();
+        $this->options['headers']['X-Atlassian-Token'] = 'no-check'; // @see https://docs.atlassian.com/jira-servicedesk/REST/3.6.2/#servicedeskapi/servicedesk/{serviceDeskId}/attachTemporaryFile
         $options = $this->options;
         $this->options = [];
         return new Response($this->client->request($this->type, $this->url, $options));
