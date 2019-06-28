@@ -211,6 +211,33 @@ class RequestService
     }
 
     /**
+     * This method adds a temporary attachment. This is required for the createAttachment method below.
+     *
+     * @param int $serviceDeskId
+     * @param string $filePath The local file path
+     *
+     * @return Response
+     *
+     * @see https://docs.atlassian.com/jira-servicedesk/REST/3.6.2/#servicedeskapi/servicedesk/{serviceDeskId}/attachTemporaryFile
+     */
+    public function createTemporaryAttachment($serviceDeskId, $filePath)
+    {
+        $multiPartOptions = [
+            [
+                'name'     => 'file',
+                'contents' => file_get_contents($filePath),
+                'filename' => basename($filePath)
+            ]
+        ];
+
+        return $this->service
+            ->setType(Service::REQUEST_METHOD_POST)
+            ->setMultipart($multiPartOptions)
+            ->setUrl('servicedesk/'.(int)$serviceDeskId.'/attachTemporaryFile')
+            ->request();
+    }
+    
+    /**
      * This method adds one or more temporary files (attached to the request’s service desk
      * using servicedesk/{serviceDeskId}/attachTemporaryFile) as attachments to a customer request and
      * set the attachment visibility using the public flag.
