@@ -49,7 +49,7 @@ class RequestModel
      * (Experimental) Shows extra information for the request channel.
      * @var string
      */
-    public $channel;
+    //public $channel;
 
     /**
      * @return int
