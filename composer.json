@@ -1,7 +1,7 @@
 {
   "name": "tricoos/jira_service_desk_api",
   "description": "Unofficial JIRA Service Desk API",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "homepage": "https://developer.atlassian.com/cloud/jira/service-desk/rest/",
   "license": "MIT",
   "authors": [
@@ -28,7 +28,7 @@
   ],
   "require": {
     "php": ">=5.5",
-    "guzzlehttp/guzzle": "^7.0"
+    "guzzlehttp/guzzle": "^7.3.0"
   },
   "require-dev": {
   },
